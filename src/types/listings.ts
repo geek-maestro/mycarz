@@ -9,7 +9,7 @@ export type listingProps = {
     passengers: number;
     rentalType: string;
     description: string;
-    images: [string];
+    images: string[];
 }
 
 export type FilterOption = {

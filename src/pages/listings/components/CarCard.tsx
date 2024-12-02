@@ -1,8 +1,22 @@
-import React from 'react'
 import { BsLuggage } from 'react-icons/bs'
 import { FaCarAlt, FaUser } from 'react-icons/fa'
+import { listingProps } from '../../../types/listings';
 
-const CarCard = ({item, selected}) => {
+// interface CarItem {
+//   type: string;
+//   description: string;
+//   passengers: number;
+//   gearshift: string;
+//   image: string;
+//   price: number;
+// }
+
+interface CarCardProps {
+  item: listingProps;
+  selected: (item: listingProps) => void;
+}
+
+const CarCard: React.FC<CarCardProps> = ({ item, selected }) => {
   return (
     <div className='rounded-lg max-w-[300px] min-w-[250px] items-center bg-gradient-to-br from-[#EB4335] via-[#EB4335] to-[#B40711] h-[400px]' onClick={() => selected(item)}>
       <div className='items-center p-5 text-white'>
