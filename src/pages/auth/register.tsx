@@ -4,6 +4,10 @@ import Navbar from "../components/Navbar";
 
 const Register = () => {
     const navigate  = useNavigate()
+    const handleRegister = (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault(); // Prevent default form submission
+      navigate("/home"); // Navigate to the intended route
+    };
   return (
     <div className="min-h-screen bg-[url(/bg.jpeg)] w-screen h-full bg-cover overflow-hidden border-2 border-[#FFFFFF] rounded-[30px] flex flex-col justify-center items-center">
         <Navbar />
@@ -47,7 +51,7 @@ const Register = () => {
           <div className="flex justify-center">
             <button
               type="submit"
-              onClick={() => navigate('/home')}
+              onClick={handleRegister}
               className="w-full max-w-xs py-2 bg-[#DF0609] text-white rounded-lg hover:bg-red-700 transition duration-300"
             >
               Register
