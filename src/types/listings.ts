@@ -1,4 +1,5 @@
 import { FormikHandlers } from "formik";
+import { carProps } from "./dashboard";
 
 export type listingProps = {
     id: number;
@@ -21,7 +22,7 @@ export type FilterOption = {
   
   // Type for selectedFilters
   export type SelectedFilters = {
-    [key in keyof listingProps | "price"]?: string;
+    [key in keyof carProps | "price"]?: string;
   };
 
   export type formValueProps = {

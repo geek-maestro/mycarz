@@ -1,28 +1,34 @@
-import { Route, Routes } from "react-router";
 import "./App.css";
 import BookingDetails from "./pages/booking";
-import LandingPage from "./pages/landing";
 import Listings from "./pages/listings";
 import MainLayout from "./pages/layout";
 import Register from "./pages/auth/register";
 import AuthLayout from "./pages/layout/auth";
+import { createBrowserRouter, RouterProvider } from "react-router"; // Correct import
+import Dashboard from "./pages/dashboard";
+import Login from "./pages/auth/login";
+
+// Define routes using createBrowserRouter
+const router = createBrowserRouter([
+  {
+    element: <AuthLayout />, // Wrapper layout for public routes
+    children: [
+      { path: "/", element: <Dashboard /> },
+      { path: "register", element: <Register /> },
+      { path: "/login", element: <Login />}
+    ],
+  },
+  {
+    element: <MainLayout />, // Wrapper layout for protected routes
+    children: [
+      { path: "/home", element: <Listings /> },
+      { path: "/home/booking", element: <BookingDetails /> },
+    ],
+  },
+]);
 
 function App() {
-  return (
-    <Routes>
-      {/* Public Routes */}
-      <Route element={<AuthLayout />} path="/">
-        <Route index element={<LandingPage />} />
-        <Route path="register" element={<Register />} />
-      </Route>
-
-      {/* Protected Routes */}
-      <Route element={<MainLayout />} path="/home">
-        <Route index element={<Listings />} />
-        <Route path="booking" element={<BookingDetails />} />
-      </Route>
-    </Routes>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

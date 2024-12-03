@@ -1,7 +1,4 @@
-import { useState } from "react";
-import { useNavigate } from "react-router";
-import CarCard from "./components/CarCard";
-import InputComponent from "../../components/InputComponent";
+import { useContext, useEffect, useState } from "react";
 import {
   CarouselProvider,
   Slide,
@@ -10,210 +7,223 @@ import {
   ButtonNext,
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
-import { Formik, FormikHelpers, FormikValues } from "formik";
-import * as Yup from "yup";
 import {
-  formValueProps,
   listingProps,
-  SelectedFilters,
 } from "../../types/listings";
+import { getCarList } from "../../services";
+import { CarListResult, carProps } from "../../types/dashboard";
+import CarsList from "../dashboard/components/CarsList";
+import { BookingContext } from "../../context/BookingContexts";
+import ToastMsg from "../dashboard/components/CarBooking/ToastMsg";
+// const carData = [
+//   {
+//     id: 1,
+//     image: "/car1.png",
+//     price: 20000,
+//     type: "Honda",
+//     gearshift: "Automatic",
+//     passengers: 4,
+//     rentalType: "Daily",
+//     description:
+//       "A reliable Honda sedan with great mileage and modern features.",
+//     images: ["/car1.png", "/car1.png", "/car1.png", "/car1.png"],
+//   },
+//   {
+//     id: 2,
+//     image: "/car1.png",
+//     price: 15000,
+//     type: "Toyota",
+//     gearshift: "Manual",
+//     passengers: 2,
+//     rentalType: "Weekly",
+//     description:
+//       "A compact Toyota coupe, perfect for city driving and efficiency.",
+//     images: ["/car1.png", "/car1.png", "/car1.png", "/car1.png"],
+//   },
+//   {
+//     id: 3,
+//     image: "/car1.png",
+//     price: 30000,
+//     type: "Nissan",
+//     gearshift: "Automatic",
+//     passengers: 6,
+//     rentalType: "Monthly",
+//     description:
+//       "A spacious Nissan SUV, ideal for family trips and off-road adventures.",
+//     images: ["/car1.png", "/car1.png", "/car1.png", "/car1.png"],
+//   },
+//   {
+//     id: 4,
+//     image: "/car1.png",
+//     price: 18000,
+//     type: "Hyundai",
+//     gearshift: "Manual",
+//     passengers: 4,
+//     rentalType: "Hourly",
+//     description:
+//       "A stylish Hyundai hatchback with excellent fuel economy and comfort.",
+//     images: ["/car1.png", "/car1.png", "/car1.png", "/car1.png"],
+//   },
+// ];
+
+// const filters = [
+//   {
+//     name: "price",
+//     id: 1,
+//     key: "price",
+//     options: ["low to high", "high to low"],
+//   },
+//   {
+//     name: "vehicle type",
+//     id: 2,
+//     key: "type",
+//     options: ["Honda", "Hyundai", "Toyota", "Nissan"],
+//   },
+//   {
+//     name: "gearshift",
+//     id: 3,
+//     key: "gearshift",
+//     options: ["Automatic", "Manual"],
+//   },
+//   {
+//     name: "passengers",
+//     id: 4,
+//     key: "passengers",
+//     options: ["4", "2", "6"],
+//   },
+//   {
+//     name: "rental type",
+//     id: 5,
+//     key: "rentalType",
+//     options: ["Daily", "Weekly", "Monthly", "Hourly"],
+//   },
+// ];
 // import moment from "moment";
 
 const Listings = () => {
-  const navigate = useNavigate();
-  const carDetails = {
-    pickupdate: new Date(),
-    returnDate: new Date(),
-    pickuptime: new Date(),
-    returntime: new Date(),
-    resetForm: () => {},
-  };
-
-  const [selectedFilters, setSelectedFilters] = useState<SelectedFilters>({});
-  const [selectedCar, setSelectedCar] = useState<listingProps | null>(null);
-  const carData = [
-    {
-      id: 1,
-      image: "/car1.png",
-      price: 20000,
-      type: "Honda",
-      gearshift: "Automatic",
-      passengers: 4,
-      rentalType: "Daily",
-      description:
-        "A reliable Honda sedan with great mileage and modern features.",
-      images: ["/car1.png", "/car1.png", "/car1.png", "/car1.png"],
-    },
-    {
-      id: 2,
-      image: "/car1.png",
-      price: 15000,
-      type: "Toyota",
-      gearshift: "Manual",
-      passengers: 2,
-      rentalType: "Weekly",
-      description:
-        "A compact Toyota coupe, perfect for city driving and efficiency.",
-      images: ["/car1.png", "/car1.png", "/car1.png", "/car1.png"],
-    },
-    {
-      id: 3,
-      image: "/car1.png",
-      price: 30000,
-      type: "Nissan",
-      gearshift: "Automatic",
-      passengers: 6,
-      rentalType: "Monthly",
-      description:
-        "A spacious Nissan SUV, ideal for family trips and off-road adventures.",
-      images: ["/car1.png", "/car1.png", "/car1.png", "/car1.png"],
-    },
-    {
-      id: 4,
-      image: "/car1.png",
-      price: 18000,
-      type: "Hyundai",
-      gearshift: "Manual",
-      passengers: 4,
-      rentalType: "Hourly",
-      description:
-        "A stylish Hyundai hatchback with excellent fuel economy and comfort.",
-      images: ["/car1.png", "/car1.png", "/car1.png", "/car1.png"],
-    },
-  ];
-
-  const filters = [
-    {
-      name: "price",
-      id: 1,
-      key: "price",
-      options: ["low to high", "high to low"],
-    },
-    {
-      name: "vehicle type",
-      id: 2,
-      key: "type",
-      options: ["Honda", "Hyundai", "Toyota", "Nissan"],
-    },
-    {
-      name: "gearshift",
-      id: 3,
-      key: "gearshift",
-      options: ["Automatic", "Manual"],
-    },
-    {
-      name: "passengers",
-      id: 4,
-      key: "passengers",
-      options: ["4", "2", "6"],
-    },
-    {
-      name: "rental type",
-      id: 5,
-      key: "rentalType",
-      options: ["Daily", "Weekly", "Monthly", "Hourly"],
-    },
-  ];
-
-  const validationSchema = Yup.object().shape({
-    pickupdate: Yup.string().required("Pick-up date is required."),
-    returnDate: Yup.string().required("Return date is required."),
-    pickuptime: Yup.string().required("Pick-up time is required."),
-    returntime: Yup.string().required("Return time is required."),
-  });
-
-  const calculateTotal = (values: FormikValues) => {
-    const { pickupdate, returnDate, pickuptime, returntime } = values;
-
-    if (!pickupdate || !returnDate || !pickuptime || !returntime) {
-      return "Please complete all fields.";
-    }
-
-    const totalHours =
-      (new Date(`${returnDate}T${returntime}`).getTime() -
-        new Date(`${pickupdate}T${pickuptime}`).getTime()) /
-      (1000 * 60 * 60);
-
-    const pricePerHour = selectedCar ? selectedCar.price / 24 : 0;
-
-    if (totalHours < 0) {
-      return "Invalid time range.";
-    }
-
-    return `$${(totalHours * pricePerHour).toFixed(2)}`;
-  };
-
-  const handleFilterChange = (
-    filterKey: keyof SelectedFilters,
-    option: string
-  ) => {
-    setSelectedFilters((prev) => ({
-      ...prev,
-      [filterKey]: option,
-    }));
-  };
-
-  const filteredCars = carData.filter((car) => {
-    return Object.entries(selectedFilters).every(([key, value]) => {
-      if (!value) return true;
-      if (key === "price") return true;
-      return (
-        String(car[key as keyof listingProps]).toLowerCase() ===
-        value.toLowerCase()
-      );
-    });
-  });
-
-  const sortedCars = [...filteredCars].sort((a, b) => {
-    if (selectedFilters.price === "low to high") return a.price - b.price;
-    if (selectedFilters.price === "high to low") return b.price - a.price;
-    return 0;
-  });
-
-  // const navigateToBooking = (car: any) => {
-  //   navigate("/booking", { state: { item: car } });
+  // const navigate = useNavigate();
+  // const carDetails = {
+  //   pickupdate: new Date(),
+  //   returnDate: new Date(),
+  //   pickuptime: new Date(),
+  //   returntime: new Date(),
+  //   resetForm: () => {},
   // };
 
-  const rent = async (
-    values: formValueProps,
-    { resetForm }: FormikHelpers<formValueProps>
-  ) => {
-    if (
-      !values.pickupdate ||
-      !values.returnDate ||
-      !values.pickuptime ||
-      !values.returntime
-    ) {
-      alert("Please fill out all required fields.");
-      return;
-    }
+  const [cars, setCars] = useState<carProps[]>([]);
+  const [filteredCars, setFilteredCars] = useState<carProps[]>([]);
+  const [carBrands, setCarBrands] = useState<string[]>([]);
+  const [selectedCar, setSelectedCar] = useState<listingProps | null>(null);
+  const bookingContext = useContext(BookingContext);
 
-    if (
-      new Date(`${values.returnDate}T${values.returntime}`) <=
-      new Date(`${values.pickupdate}T${values.pickuptime}`)
-    ) {
-      alert("Return date/time must be after pick-up date/time.");
-      return;
-    }
+  if (!bookingContext) {
+    throw new Error("BookingContext must be used within a BookingProvider");
+  }
 
-    navigate("/home/booking", {
-      state: {
-        item: selectedCar ? { ...selectedCar } : null, // Ensure serializability
-        values: {
-          pickupdate: values.pickupdate.toISOString(),
-          returnDate: values.returnDate.toISOString(),
-          pickuptime: values.pickuptime.toISOString(),
-          returntime: values.returntime.toISOString(),
-        },
-      },
-    });
-    resetForm();
+  const { showToast } = bookingContext;
+
+  const _getCarList = async () => {
+    try {
+      const result: CarListResult = await getCarList();
+      setCars(result.cars);
+      setFilteredCars(result.cars);
+  
+      // Extract car brands dynamically
+      const brands = Array.from(new Set(result.cars.map((car) => car.carBrand)));
+      setCarBrands(brands);
+    } catch (error) {
+      console.error("Failed to fetch car list:", error);
+    }
   };
+  
+
+  useEffect(() => {
+    _getCarList();
+  }, []);
+
+  // const validationSchema = Yup.object().shape({
+  //   pickupdate: Yup.string().required("Pick-up date is required."),
+  //   returnDate: Yup.string().required("Return date is required."),
+  //   pickuptime: Yup.string().required("Pick-up time is required."),
+  //   returntime: Yup.string().required("Return time is required."),
+  // });
+
+  // const calculateTotal = (values: formValueProps) => {
+  //   const { pickupdate, returnDate, pickuptime, returntime } = values;
+
+  //   if (!pickupdate || !returnDate || !pickuptime || !returntime) {
+  //     return "Please complete all fields.";
+  //   }
+
+  //   const totalHours =
+  //     (new Date(`${returnDate}T${returntime}`).getTime() -
+  //       new Date(`${pickupdate}T${pickuptime}`).getTime()) /
+  //     (1000 * 60 * 60);
+
+  //   const pricePerHour = selectedCar ? selectedCar.price / 24 : 0;
+
+  //   if (totalHours < 0) {
+  //     return "Invalid time range.";
+  //   }
+
+  //   return `$${(totalHours * pricePerHour).toFixed(2)}`;
+  // };
+
+  const handleSortByPrice = (order: number) => {
+    const sorted = [...filteredCars].sort((a, b) =>
+      order === -1 ? a.price - b.price : b.price - a.price
+    );
+    setFilteredCars(sorted);
+  };
+
+  const handleFilterByBrand = (brand: string) => {
+    if (!brand) {
+      setFilteredCars(cars);
+    } else {
+      const filtered = cars.filter((car) => car.carBrand === brand);
+      setFilteredCars(filtered);
+    }
+  };
+
+  // const rent = async (
+  //   values: formValueProps,
+  //   { resetForm }: FormikHelpers<formValueProps>
+  // ) => {
+  //   if (
+  //     !values.pickupdate ||
+  //     !values.returnDate ||
+  //     !values.pickuptime ||
+  //     !values.returntime
+  //   ) {
+  //     alert("Please fill out all required fields.");
+  //     return;
+  //   }
+
+  //   if (
+  //     new Date(`${values.returnDate}T${values.returntime}`) <=
+  //     new Date(`${values.pickupdate}T${values.pickuptime}`)
+  //   ) {
+  //     alert("Return date/time must be after pick-up date/time.");
+  //     return;
+  //   }
+
+  //   navigate("/home/booking", {
+  //     state: {
+  //       item: selectedCar ? { ...selectedCar } : null, // Ensure serializability
+  //       values: {
+  //         pickupdate: values.pickupdate.toISOString(),
+  //         returnDate: values.returnDate.toISOString(),
+  //         pickuptime: values.pickuptime.toISOString(),
+  //         returntime: values.returntime.toISOString(),
+  //       },
+  //     },
+  //   });
+  //   resetForm();
+  // };
 
   return (
     <div>
       {/* <Nav /> */}
-
       <div className="flex px-10">
         <div
           className={`flex-1 ${
@@ -224,48 +234,45 @@ const Listings = () => {
             WHICH CAR DO YOU WANT TO DRIVE?
           </div>
 
-          <div className="flex flex-wrap gap-4 my-5 text-[#010101] text-base">
-            {filters.map((filter) => (
-              <div key={filter.id} className="flex flex-col">
-                <label className="font-semibold mb-2 capitalize">
-                  {filter.name}
-                </label>
-                <select
-                  className={`rounded-2xl px-5 py-2 ${
-                    selectedFilters[filter.key as keyof SelectedFilters]
-                      ? "bg-[#DF0609] text-[#f1f1f1]"
-                      : "bg-[#F5F5F5]"
-                  }`}
-                  onChange={(e) =>
-                    handleFilterChange(
-                      filter.key as keyof SelectedFilters,
-                      e.target.value
-                    )
-                  }
-                  value={selectedFilters[filter.key as keyof SelectedFilters] || ""}
-                >
-                  <option value="">All</option>
-                  {filter.options.map((option, idx) => (
-                    <option key={idx} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            ))}
+          <div className="flex gap-5">
+            <select
+              className="select select-bordered max-w-xs hidden md:block w-full"
+              onChange={(e) => handleSortByPrice(Number(e.target.value))}
+            >
+              <option disabled selected>
+                Price
+              </option>
+              <option value={-1}>Min to max</option>
+              <option value={1}>max to min</option>
+            </select>
+
+            <select
+              className="select select-bordered w-full capitalize max-w-xs"
+              onChange={(e) => handleFilterByBrand(e.target.value)}
+            >
+              <option value="" selected>
+                Manufacturer
+              </option>
+              {carBrands.map((brand, idx) => (
+                <option key={idx} value={brand}>
+                  {brand}
+                </option>
+              ))}
+            </select>
           </div>
 
-          <div
-            className={`my-10 grid ${
+          {/* <div
+            className={`grid ${
               selectedCar
                 ? "grid-cols-2"
                 : "grid-cols-1 md:grid-cols-3 lg:grid-cols-4"
             } gap-5 items-center mx-auto`}
           >
-            {sortedCars.map((car) => (
-              <CarCard key={car.id} item={car} selected={setSelectedCar} />
-            ))}
-          </div>
+            {filteredCars.map((car) => (
+          <CarCard key={car.id} item={car} selected={setSelectedCar} />
+        ))}
+          </div> */}
+          <CarsList cars={cars} />
         </div>
 
         {selectedCar && (
@@ -346,7 +353,7 @@ const Listings = () => {
               </div>
             </div>
 
-            <Formik
+            {/* <Formik
               initialValues={carDetails}
               validationSchema={validationSchema}
               onSubmit={rent}
@@ -358,7 +365,7 @@ const Listings = () => {
                       Rental Details
                     </div>
                     <div className="flex flex-col border rounded-lg p-5">
-                      {/* Date Inputs */}
+                      {/* Date Inputs 
                       <div className="flex justify-between items-center border-b py-1">
                         <div>
                           <InputComponent
@@ -390,7 +397,7 @@ const Listings = () => {
                         </div>
                       </div>
 
-                      {/* Time Inputs */}
+                      {/* Time Inputs 
                       <div className="flex justify-between items-center border-b py-1">
                         <div>
                           <InputComponent
@@ -422,7 +429,7 @@ const Listings = () => {
                         </div>
                       </div>
 
-                      {/* Total Time */}
+                      {/* Total Time 
                       <div className="flex justify-between items-center border-b py-1">
                         <div className="capitalize">Total Price</div>
                         <div className="font-semibold text-lg">
@@ -446,10 +453,11 @@ const Listings = () => {
                   </div>
                 </>
               )}
-            </Formik>
+            </Formik>*/}
           </div>
         )}
-      </div>
+      </div> 
+      {showToast && <ToastMsg msg="Booking created Successfully" />}
     </div>
   );
 };

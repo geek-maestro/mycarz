@@ -1,14 +1,24 @@
-import { Outlet } from 'react-router'
+// import { Outlet } from 'react-router'
+
+import { SignedIn, SignedOut, SignIn } from "@clerk/clerk-react";
+import { Outlet } from "react-router";
+import PubNav from "../../components/PubNav";
+import Footer from "../dashboard/components/Footer";
 
 const AuthLayout = () => {
   return (
-    <>
-      {/* <Navbar /> */}
-      <main>
+    <header className="items-center flex h-full flex-col">
+      <SignedIn>
+        <PubNav />
         <Outlet />
-      </main>
-    </>
-  )
-}
+        <Footer /> 
+      </SignedIn>
+      <SignedOut>
+      <PubNav />
+        <SignIn path="/login"/>
+      </SignedOut>
+    </header>
+  );
+};
 
-export default AuthLayout
+export default AuthLayout;
