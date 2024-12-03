@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { carProps } from "../../../types/dashboard";
 
 interface CarCardProps {
-  item: carProps;
+  item: carProps | null;
 }
 
 const CarCard: React.FC<CarCardProps> = ({ item }) => {

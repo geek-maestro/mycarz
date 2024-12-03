@@ -1,9 +1,12 @@
-import React from "react";
 import { carProps } from "../../../../types/dashboard";
 import CarCard from "../../../listings/components/CarCard";
 import Form from "./Form";
 
-const BookingModal = ({selected}: carProps) => {
+interface FormProps {
+  selected: carProps | null;
+}
+
+const BookingModal = ({selected}: FormProps) => {
   return (
     <form method="dialog" className="modal-box w-11/12 max-w-5xl">
         <div className="border-b pb-2">

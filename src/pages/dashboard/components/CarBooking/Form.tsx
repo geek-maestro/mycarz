@@ -21,7 +21,7 @@ export interface FormDetails {
 }
 
 interface FormProps {
-    car: carProps;
+    car: carProps | null;
   }
 
 const Form = ({ car }: FormProps) => {
@@ -103,10 +103,10 @@ const handleSubmit = async () => {
 
       // Send confirmation email
       handleSendEmail({
-        username: user?.fullName,
-        carBrand: car?.name,
-        dropoffdate: formDetails?.dropoffdate,
-        dropofftime: formDetails?.dropofftime,
+        username: user?.fullName ?? "",
+        carBrand: car?.name ?? "",
+        dropoffdate: formDetails?.dropoffdate ?? "",
+        dropofftime: formDetails?.dropofftime ?? "",
         pickupdate: formDetails?.pickupdate,
         pickuptime: formDetails?.pickuptime,
         location: formDetails?.location,

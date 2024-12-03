@@ -1,10 +1,14 @@
-import React, { useState } from "react";
-import { CarListResult, carProps } from "../../../types/dashboard";
+import { useState } from "react";
+import { carProps } from "../../../types/dashboard";
 import CarCard from "../../listings/components/CarCard";
 import BookingModal from "./CarBooking/BookingModal";
 import { useAuth } from "@clerk/clerk-react";
 
-const CarsList = ({ cars }: CarListResult) => {
+interface CarsListProps {
+  cars: carProps[];
+}
+
+const CarsList: React.FC<CarsListProps> = ({ cars }) => {
   const [selectedCar, setSelectedCar] = useState<carProps | null>(null);
   const { isSignedIn } = useAuth();
 
