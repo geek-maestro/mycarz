@@ -60,7 +60,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="container w-full ">
+    <div className="w-full ">
       <BookingContext.Provider value={{ showToast, setShowToast }}>
         {/* hero */}
         <Hero />
