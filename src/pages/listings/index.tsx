@@ -222,7 +222,7 @@ const Listings = () => {
   // };
 
   return (
-    <div>
+    <div className="my-10">
       {/* <Nav /> */}
       <div className="flex px-10">
         <div
@@ -234,7 +234,7 @@ const Listings = () => {
             WHICH CAR DO YOU WANT TO DRIVE?
           </div>
 
-          <div className="flex gap-5">
+          <div className="flex gap-5 my-10">
             <select
               className="select select-bordered max-w-xs hidden md:block w-full"
               onChange={(e) => handleSortByPrice(Number(e.target.value))}

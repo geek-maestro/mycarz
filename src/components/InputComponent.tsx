@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 
 type InputProps = {
   leftIcon?: ReactNode;
@@ -7,9 +7,10 @@ type InputProps = {
   secureEntry?: boolean;
   placeholder: string;
   label?: string;
-  change?(value: string): void;
+  change?(event: React.ChangeEvent<HTMLInputElement>): void;
   blur?(value: string): void;
   value?: string | number | readonly string[] | undefined;
+  name?: string;
 };
 
 const InputComponent = ({
@@ -21,7 +22,8 @@ const InputComponent = ({
   label,
   change,
   blur,
-  value
+  value,
+  name
 }: InputProps) => {
   return (
     <div className="space-y-2 p-2 w-full">
@@ -41,9 +43,10 @@ const InputComponent = ({
           type={secureEntry ? "password" : type}
           className="flex-1 border-none outline-none bg-transparent w-full"
           placeholder={placeholder}
-          onChange={(e) => change?.(e.target.value)}
+          onChange={(e) => change?.(e)}
           onBlur={(e) => blur?.(e.target.value)}
           value={value}
+          name={name}
         />
         {rightIcon && <div className="flex items-center">{rightIcon}</div>}
       </div>

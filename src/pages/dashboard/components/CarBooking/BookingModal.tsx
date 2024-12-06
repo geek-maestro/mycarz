@@ -8,7 +8,7 @@ interface FormProps {
 
 const BookingModal = ({selected}: FormProps) => {
   return (
-    <form method="dialog" className="modal-box w-11/12 max-w-5xl">
+    <form method="" className="modal-box w-11/12 max-w-5xl">
         <div className="border-b pb-2">
             <h3 className="text-[30px] font-light test-gray-400 capitalize">Rent your dreamcar now!</h3>
         </div>

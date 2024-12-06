@@ -11,11 +11,13 @@ const AuthLayout = () => {
       <SignedIn>
         <PubNav />
         <Outlet />
-        <Footer /> 
+        <Footer />
       </SignedIn>
       <SignedOut>
-      <PubNav />
-        <SignIn path="/login"/>
+        <PubNav />
+        <div className="flex items-center justify-center h-[80vh]">
+        <SignIn />
+        </div>
       </SignedOut>
     </header>
   );
