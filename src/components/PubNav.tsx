@@ -1,10 +1,10 @@
-import {  useAuth, UserButton } from "@clerk/clerk-react";
-import { NavLink, useNavigate } from "react-router"; // Updated import
+// import {  useAuth, UserButton } from "@clerk/clerk-react";
+import { NavLink } from "react-router"; // Updated import
 
 const PubNav = () => {
   const navItems = ["home", "history", "contact-us"];
-  const { isSignedIn } = useAuth()
-  const navigate=  useNavigate()
+  // const { isSignedIn } = useAuth()
+  // const navigate=  useNavigate()
   return (
     <header className="flex items-center p-5 shadow-md sticky top-0 h-full w-full bg-gradient-to-r from-[#ff4500] to-[#b40711] text-white z-10">
       <nav className="flex justify-between items-center w-full">
@@ -36,7 +36,7 @@ const PubNav = () => {
           </div>
 
           {/* User Avatar */}
-          <div className="flex items-center">
+          {/* <div className="flex items-center">
             {isSignedIn ? (
             <UserButton showName />
           ): (
@@ -55,7 +55,7 @@ const PubNav = () => {
                 </button>
               </div>
           )}
-          </div>
+          </div> */}
         </div>
       </nav>
     </header>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { carProps } from "../../../types/dashboard";
 import CarCard from "../../listings/components/CarCard";
 import BookingModal from "./CarBooking/BookingModal";
-import { useAuth } from "@clerk/clerk-react";
+// import { useAuth } from "@clerk/clerk-react";
 
 interface CarsListProps {
   cars: carProps[];
@@ -10,13 +10,13 @@ interface CarsListProps {
 
 const CarsList: React.FC<CarsListProps> = ({ cars }) => {
   const [selectedCar, setSelectedCar] = useState<carProps | null>(null);
-  const { isSignedIn } = useAuth();
+  // const { isSignedIn } = useAuth();
 
   const handleCarClick = (car: carProps) => {
-    if (!isSignedIn) {
-      alert("Please sign in to book a car.");
-      return;
-    }
+    // if (!isSignedIn) {
+    //   alert("Please sign in to book a car.");
+    //   return;
+    // }
 
     const modal = document.getElementById("my_modal_4") as HTMLDialogElement;
     modal?.showModal();
