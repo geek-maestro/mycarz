@@ -11,7 +11,7 @@ export type bookingDataProps = {
 }
 
 export type emailDataProps = {
-    username: string | null | undefined;
+    username?: string | null | undefined;
     carBrand: string;
     pickupdate: string;
     pickuptime: string;
@@ -19,7 +19,7 @@ export type emailDataProps = {
     dropoffdate: string;
     location: string;
     bookingid:string;
-    useremail: string | null | undefined;
+    useremail?: string | null | undefined;
 
 }
 

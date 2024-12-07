@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "@clerk/clerk-react";
-import { useNavigate } from "react-router";
+// import { useAuth } from "@clerk/clerk-react";
+// import { useNavigate } from "react-router";
 import Hero from "./components/hero";
 import Searchinput from "./components/searchinput";
 import CarsFilterOption from "./components/CarsFilterOption";
@@ -9,14 +9,15 @@ import { carProps } from "../../types/dashboard";
 import CarsList from "./components/CarsList";
 import ToastMsg from "./components/CarBooking/ToastMsg";
 import { BookingContext } from "../../context/BookingContexts";
+import Feedback from "./components/Feedback";
 
 interface CarListResult {
   cars: carProps[];
 }
 
 const Dashboard = () => {
-  const { userId, isLoaded } = useAuth();
-  const navigate = useNavigate();
+  // const { userId, isLoaded } = useAuth();
+  // const navigate = useNavigate();
   const [cars, setCars] = useState<carProps[]>([]);
   const [filteredList, setFilteredList] = useState<carProps[]>([]);
   const [showToast, setShowToast] = useState<boolean>(false);
@@ -27,11 +28,11 @@ const Dashboard = () => {
     setFilteredList(result.cars);
   };
 
-  useEffect(() => {
-    if (isLoaded && !userId) {
-      navigate("/login");
-    }
-  }, [isLoaded]);
+  // useEffect(() => {
+  //   if (isLoaded && !userId) {
+  //     navigate("/login");
+  //   }
+  // }, [isLoaded]);
 
   useEffect(() => {
     _getCarList();
@@ -45,7 +46,7 @@ const Dashboard = () => {
     }
   }, [showToast]);
 
-  if (!isLoaded) return "Loading...";
+  // if (!isLoaded) return "Loading...";
 
   const filteredCarList = (brand: string) => {
     const filterList = filteredList.filter((item) => item.carBrand === brand);
@@ -71,6 +72,7 @@ const Dashboard = () => {
           orderList={(value: number) => orderedList(value)}
         />
         <CarsList cars={cars} />
+        <Feedback />
         {showToast && <ToastMsg msg="Booking created Successfully" />}
       </BookingContext.Provider>
     </div>

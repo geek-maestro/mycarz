@@ -3,7 +3,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { createBooking, getLocations } from "../../../../services";
 import { carProps } from "../../../../types/dashboard";
-import { useUser } from "@clerk/clerk-react";
+// import { useUser } from "@clerk/clerk-react";
 import { BookingContext } from "../../../../context/BookingContexts";
 import emailjs from "@emailjs/browser";
 import { emailDataProps, locationResProps } from "../../../../types/forms";
@@ -11,8 +11,8 @@ import InputComponent from "../../../../components/InputComponent";
 
 export interface FormDetails {
   location: string;
-  name: string;
-  email: string;
+  name?: string;
+  email?: string;
   pickupdate: string;
   pickuptime: string;
   dropoffdate: string;
@@ -27,8 +27,8 @@ interface FormProps {
 
 const Form = ({ car }: FormProps) => {
   const [loc, setLoc] = useState<locationResProps["storedLocations"]>([]);
-  const [next, setNext] = useState("booking");
-  const { user } = useUser();
+  const [next, setNext] = useState("userdetails");
+  // const { user } = useUser();
   const bookingContext = useContext(BookingContext);
 
   if (!bookingContext) {
@@ -71,15 +71,15 @@ const Form = ({ car }: FormProps) => {
     }
   }, [car]);
 
-  useEffect(() => {
-    if (user) {
-      setFormDetails((prev) => ({
-        ...prev,
-        name: user.fullName || "",
-        email: user.primaryEmailAddress?.emailAddress || "",
-      }));
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     setFormDetails((prev) => ({
+  //       ...prev,
+  //       name: user.fullName || "",
+  //       email: user.primaryEmailAddress?.emailAddress || "",
+  //     }));
+  //   }
+  // }, [user]);
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -105,14 +105,14 @@ const Form = ({ car }: FormProps) => {
 
         // Send confirmation email
         handleSendEmail({
-          username: user?.fullName ?? "",
+          // username: user?.fullName ?? "",
           carBrand: car?.name ?? "",
           dropoffdate: formDetails?.dropoffdate ?? "",
           dropofftime: formDetails?.dropofftime ?? "",
           pickupdate: formDetails?.pickupdate,
           pickuptime: formDetails?.pickuptime,
           location: formDetails?.location,
-          useremail: user?.primaryEmailAddress?.emailAddress,
+          // useremail: user?.primaryEmailAddress?.emailAddress,
           bookingid: res?.createBooking?.id, // Use the booking ID returned from the response
         });
       }
