@@ -10,7 +10,6 @@ import CarsList from "./components/CarsList";
 import ToastMsg from "./components/CarBooking/ToastMsg";
 import { BookingContext } from "../../context/BookingContexts";
 import Feedback from "./components/Feedback";
-import Navbar from "./components/Navbar";
 
 interface CarListResult {
   cars: carProps[];

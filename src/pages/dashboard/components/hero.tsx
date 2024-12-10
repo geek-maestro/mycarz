@@ -23,7 +23,6 @@ const Hero = () => {
               </button>
             </div>
             <div className="w-full h-[500px]">
-              {/* <img src="/car1.png" alt="car" className='w-[90%] h-full object-contain'/> */}
             </div>
           </div>
         </div>
