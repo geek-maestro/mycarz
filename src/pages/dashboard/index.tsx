@@ -10,6 +10,7 @@ import CarsList from "./components/CarsList";
 import ToastMsg from "./components/CarBooking/ToastMsg";
 import { BookingContext } from "../../context/BookingContexts";
 import Feedback from "./components/Feedback";
+import Navbar from "./components/Navbar";
 
 interface CarListResult {
   cars: carProps[];
@@ -62,7 +63,9 @@ const Dashboard = () => {
 
   return (
     <div className="w-full ">
+
       <BookingContext.Provider value={{ showToast, setShowToast }}>
+
         {/* hero */}
         <Hero />
         <Searchinput />

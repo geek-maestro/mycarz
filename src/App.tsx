@@ -6,6 +6,7 @@ import MainLayout from "./pages/layout";
 // import AuthLayout from "./pages/layout/auth";
 import { createBrowserRouter, RouterProvider } from "react-router"; // Correct import
 import Dashboard from "./pages/dashboard";
+import LandingPage from "./pages/landing_page";
 // import Login from "./pages/auth/login";
 
 // Define routes using createBrowserRouter
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
   {
     element: <MainLayout />, // Wrapper layout for protected routes
     children: [
-      { path: "/", element: <Dashboard /> },
+      { path: "/", element: <LandingPage /> },
       { path: "/home", element: <Listings /> },
       { path: "/home/booking", element: <BookingDetails /> },
     ],
