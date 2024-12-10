@@ -2,7 +2,7 @@ import { FaLocationDot } from "react-icons/fa6";
 
 const Searchinput = () => {
   return (
-    <div className="w-full justify-center">
+    <div className="w-full justify-center z-100">
       <h2 className="capitalize text-center text-[20px] text-gray-400">
         Let get you the perfect ride
       </h2>
