@@ -1,10 +1,17 @@
-import React from "react";
+// /src/components/SearchBar.jsx
+import React, { useState } from "react";
 
 const SearchBar = () => {
+  const [showAddressField, setShowAddressField] = useState(false);
+
+  const toggleAddressField = () => {
+    setShowAddressField(!showAddressField);
+  };
+
   return (
-    <div className="items-center  justify-center mx-auto w-full md:absolute lg:absolute flex z-20">
-      <div className="bg-primary p-10 rounded-2xl">
-        <div className="flex flex-col mg:flex-row lg:flex-row items-center text-textPrimary w-full justify-between gap-5">
+    <div className="flex flex-col md:flex-row items-center justify-center mx-auto w-full p-5 z-20">
+      <div className="bg-primary p-5 md:p-10 rounded-2xl w-full md:w-auto">
+        <div className="flex flex-col md:flex-row items-center text-textPrimary justify-between gap-5">
           <div>
             <img
               src="/logo.png"
@@ -12,51 +19,56 @@ const SearchBar = () => {
               className="h-[50px] w-[50px] object-cover"
             />
           </div>
+
           <div>
             <input
               type="search"
-              name=""
-              id=""
               placeholder="Search"
-              className="border-b border-b-gray-200 bg-white rounded-lg py-2 px-3 w-[280px] text-gray-500"
+              className="border border-gray-200 bg-white rounded-lg py-2 px-3 w-full md:w-[280px] text-gray-500"
             />
           </div>
-          <div>+ Different return location</div>
 
           <div className="flex items-center">
             <input
               type="date"
-              name=""
-              id=""
-              className="border-r-2 px-3 bg-white text-gray-500 py-2 rounded-tl-xl rounded-bl-xl"
+              className="border border-gray-200 px-3 bg-white text-gray-500 py-2 rounded-tl-lg rounded-bl-lg"
             />
-            {/* <div className="divider divider-horizontal divider-start" /> */}
             <input
               type="time"
-              name=""
-              id=""
-              className="px-3 bg-white text-gray-500 py-2 rounded-tr-xl rounded-br-xl"
+              className="border border-gray-200 px-3 bg-white text-gray-500 py-2 rounded-tr-lg rounded-br-lg"
             />
           </div>
+
           <div className="flex items-center">
             <input
               type="date"
-              name=""
-              id=""
-              className="border-r-2 px-3 bg-white text-gray-500 py-2 rounded-tl-xl rounded-bl-xl"
+              className="border border-gray-200 px-3 bg-white text-gray-500 py-2 rounded-tl-lg rounded-bl-lg"
             />
             <input
               type="time"
-              name=""
-              id=""
-              className="px-3 bg-white text-gray-500 py-2 rounded-tr-xl rounded-br-xl"
+              className="border border-gray-200 px-3 bg-white text-gray-500 py-2 rounded-tr-lg rounded-br-lg"
             />
           </div>
 
           <div>
-            <button className="btn">
-              <span className="loading loading-spinner"></span>
-              loading
+            <button
+              className="text-blue-500 underline"
+              onClick={toggleAddressField}
+            >
+              + Add delivery address
+            </button>
+            {showAddressField && (
+              <input
+                type="text"
+                placeholder="Enter delivery address"
+                className="mt-2 border border-gray-200 bg-white rounded-lg py-2 px-3 w-full md:w-[280px] text-gray-500"
+              />
+            )}
+          </div>
+
+          <div>
+            <button className="btn bg-blue-500 text-white py-2 px-4 rounded-lg">
+              Search
             </button>
           </div>
         </div>

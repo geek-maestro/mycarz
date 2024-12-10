@@ -31,4 +31,12 @@ export type FilterOption = {
     pickuptime: Date;
     returntime: Date;
     resetForm: FormikHandlers['handleReset']
+    company?: string;
+    firstName?: string;
+    lastName: string;
+    email: string;
+    cardNumber: string;
+    cardholderName: string;
+    expiryDate: string;
+    cvv:string
   }
