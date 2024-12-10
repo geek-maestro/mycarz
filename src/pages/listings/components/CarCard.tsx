@@ -1,14 +1,18 @@
 import { BsLuggage } from "react-icons/bs";
 import { FaCarAlt, FaUser } from "react-icons/fa";
 import { MdOutlineCarRental } from "react-icons/md";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { carProps } from "../../../types/dashboard";
+import BookingForm from "../../landing_page/components/BookingForm";
+import { listingProps } from "../../../types/listings";
 
 interface CarCardProps {
   item: carProps | null;
+  setSelected: Dispatch<SetStateAction<listingProps | null>>
+  selected: listingProps | null
 }
 
-const CarCard: React.FC<CarCardProps> = ({ item }) => {
+const CarCard: React.FC<CarCardProps> = ({ item, selected, setSelected }) => {
   const [car, setCar] = useState<carProps | null>(null);
 
   useEffect(() => {
@@ -18,7 +22,7 @@ const CarCard: React.FC<CarCardProps> = ({ item }) => {
   }, [item]);
 
   return (
-    <div className="group relative rounded-lg flex flex-col bg-gradient-to-br from-[#ff7f50] via-[#ff4500] to-[#b40711] h-[400px] overflow-hidden shadow-lg transition-transform transform hover:scale-105">
+    <div className="group relative rounded-lg flex flex-col bg-gradient-to-br from-[#ff7f50] via-[#ff4500] to-[#b40711] h-[400px] overflow-hidden shadow-lg transition-transform transform hover:scale-105"  onClick={()=>document.getElementById('car_modal_3').showModal()}>
       {/* Image Section */}
       <div className="w-full h-[60%] group-hover:h-full">
         <img
@@ -68,6 +72,10 @@ const CarCard: React.FC<CarCardProps> = ({ item }) => {
           <MdOutlineCarRental size={25} />
         </button>
       </div>
+
+      {/* { selected && (
+        <BookingForm />
+      )} */}
     </div>
   );
 };

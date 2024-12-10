@@ -3,8 +3,9 @@ import SearchBar from "../../landing_page/components/SearchBar";
 
 const Navbar = () => {
   return (
-    <header className="sticky -top-14 z-30">
+    <header className="md:sticky lg:sticky -top-24 z-30">
       <nav>
+        <div className="hidden md:block lg:block">
         <div className="navbar bg-base-100">
           <div className="flex-none">
             <button className="btn btn-square btn-ghost">
@@ -46,6 +47,12 @@ const Navbar = () => {
         </div>
 
         <SearchBar />
+        </div>
+
+
+        <div className="w-full items-center justify-center flex sticky top-2 md:hidden lg:hidden">
+          <input type="search" name="" id="" className="w-[90%] bg-white text-slate-600 px-3 py-2 rounded-lg" placeholder="Search..."/>
+        </div>
       </nav>
     </header>
   );

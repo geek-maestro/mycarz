@@ -7,6 +7,7 @@ import MainLayout from "./pages/layout";
 import { createBrowserRouter, RouterProvider } from "react-router"; // Correct import
 import Dashboard from "./pages/dashboard";
 import LandingPage from "./pages/landing_page";
+import BookingInfo from "./pages/landing_page/BookingInfo";
 // import Login from "./pages/auth/login";
 
 // Define routes using createBrowserRouter
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <LandingPage /> },
       { path: "/home", element: <Listings /> },
-      { path: "/home/booking", element: <BookingDetails /> },
+      { path: "/home/booking", element: <BookingInfo /> },
     ],
   },
 ]);
