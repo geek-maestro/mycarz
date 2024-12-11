@@ -39,7 +39,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ open: isOpen, setOpen: setIsO
               >
                 ✕
               </button>
-              <form>
+              <div>
                 <div className="bg-gradient-to-br from-primary via-accent w-screen">
                   <img src="/car1.png" alt="" className="object-contain"/>
                 </div>
@@ -188,7 +188,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ open: isOpen, setOpen: setIsO
                     </div>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
 
