@@ -9,7 +9,7 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center mx-auto w-full p-5 z-20">
+    <div className="flex flex-col md:flex-row md:flex-wrap items-center justify-center w-full p-5 z-20">
       <div className="bg-primary p-5 md:p-10 rounded-2xl w-full md:w-auto">
         <div className="flex flex-col md:flex-row items-center text-textPrimary justify-between gap-5">
           <div>

@@ -401,7 +401,7 @@ const BookingDetails = () => {
                   <div className="flex justify-center py-5">
                     <button
                       type="submit"
-                      className="bg-red-600 text-white  w-[60%] py-2 rounded-lg font-semibold"
+                      className="bg-red-600 hover:bg-[#FFC107] text-white  w-[60%] py-2 rounded-lg font-semibold"
                     >
                       {isSubmitting ? "Processing..." : "Pay and Book"}
                     </button>

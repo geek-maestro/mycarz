@@ -1,6 +1,4 @@
 import { Outlet } from 'react-router'
-import PubNav from '../../components/PubNav'
-import Footer from '../dashboard/components/Footer'
 import Navbar from '../dashboard/components/Navbar'
 
 const MainLayout = () => {
@@ -8,10 +6,9 @@ const MainLayout = () => {
     <>
       {/* <PubNav /> */}
       <Navbar />
-      <main>
+      <main className='w-full bg-[#F7F7F7] h-full'>
         <Outlet />
       </main>
-      {/* <Footer /> */}
     </>
   )
 }

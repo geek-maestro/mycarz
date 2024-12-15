@@ -85,11 +85,11 @@ const Feedback = () => {
             Hear what our customers have to say about their experience.
           </p>
         </div>
-        <div className="carousel carousel-center bg-neutral rounded-box space-x-6 px-4 py-6">
+        <div className="carousel carousel-center bg-neutral rounded-box space-x-6 px-4 py-6 w-full">
           {feedbacks.map((feedback) => (
             <div
               key={feedback.id}
-              className="carousel-item flex flex-col items-center bg-white shadow-lg rounded-lg p-6 md:p-8 max-w-sm mx-auto"
+              className="carousel-item flex flex-col items-center bg-white shadow-lg rounded-lg p-6 md:p-8 max-w-[280px] mx-auto"
             >
               <div className="flex items-center w-full mb-4">
                 <img
