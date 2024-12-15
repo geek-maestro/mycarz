@@ -5,7 +5,7 @@ const Hero = () => {
   const navigate = useNavigate();
   return (
     <div
-      className="bg-cover h-[100vh]"
+      className="bg-cover h-[100vh] w-full"
       style={{
         backgroundImage: `url(${bgImage})`, // Use inline styles for dynamic background
       }}
@@ -28,7 +28,7 @@ const Hero = () => {
                 Explore more
               </button>
             </div>
-            <div className="w-full h-[500px]"></div>
+            {/* <div className="w-full h-[500px]"></div> */}
           </div>
         </div>
       </div>

@@ -3,7 +3,6 @@ import { FaCarAlt, FaUser } from "react-icons/fa";
 import { MdOutlineCarRental } from "react-icons/md";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { carProps } from "../../../types/dashboard";
-import BookingForm from "../../landing_page/components/BookingForm";
 import { listingProps } from "../../../types/listings";
 
 interface CarCardProps {
@@ -24,46 +23,48 @@ const CarCard: React.FC<CarCardProps> = ({ item, selected, setSelected }) => {
   return (
     <div className="group relative rounded-lg flex flex-col bg-gradient-to-br from-[#ff7f50] via-[#ff4500] to-[#b40711] h-[400px] overflow-hidden shadow-lg transition-transform transform hover:scale-105"  onClick={()=>document.getElementById('car_modal_3').showModal()}>
       {/* Image Section */}
-      <div className="w-full h-[60%] group-hover:h-full">
+      <div className="w-full h-full group-hover:h-full mt-10">
         <img
           src={car?.image?.[0]?.url || ""}
           alt={car?.name || "Car Image"}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
         />
       </div>
 
       {/* Info Section */}
-      <div className="flex flex-col h-full text-gray-500 ">
-        <div className="bg-[#ffffffcc] bg-opacity-20 px-3 py-3 space-y-2 rounded">
+      {/* <div className="flex flex-col h-[44%] text-[#f1f1f1] "> */}
+        <div className="bg-opacity-20 px-3 py-3 space-y-2 rounded">
           {/* Car Details */}
+          <div className=" absolute top-2 text-[#f1f1f1]">
           <div>
-            <div className="text-2xl font-bold capitalize">{car?.name}</div>
+            <div className="text-xl font-semibold capitalize">{car?.name}</div>
             <div className="text-sm capitalize">{car?.carBrand}</div>
           </div>
 
           {/* Icons and Stats */}
-          <div className="flex items-center justify-between text-white">
+          <div className="flex flex-wrap items-center gap-3 text-white mt-5">
             <div className="flex items-center space-x-2 bg-[#ff4500] px-3 py-1 rounded-full shadow-md">
               <FaUser />
-              <span>{car?.seats}</span>
+              <span className="text-xs">{car?.seats}</span>
             </div>
-            <div className="flex items-center space-x-2 bg-[#ff4500] px-3 py-1 rounded-full shadow-md">
+            <div className="flex text-xs items-center space-x-2 bg-[#ff4500] px-3 py-1 rounded-full shadow-md">
               <BsLuggage />
-              <span>{car?.seats}</span>
+              <span className="text-xs">{car?.seats}</span>
             </div>
-            <div className="flex items-center space-x-2 bg-[#ff4500] px-3 py-1 rounded-full shadow-md">
+            <div className="flex text-xs items-center space-x-2 bg-[#ff4500] px-3 py-1 rounded-full shadow-md">
               <FaCarAlt />
-              <span>{car?.carType}</span>
+              <span className="text-xs">{car?.carType}</span>
             </div>
+          </div>
           </div>
 
           {/* Price (Hidden on Hover) */}
-          <div className="group-hover:opacity-0 transition-opacity duration-300">
+          <div className="group-hover:opacity-0 transition-opacity duration-300 absolute text-[#f1f1f1] bottom-2">
             <div>Unlimited km</div>
-            <div className="font-bold text-lg text-gray-500">${car?.price} / week</div>
+            <div className="font-bold text-lg">${car?.price} / week</div>
           </div>
         </div>
-      </div>
+      {/* </div> */}
 
       {/* Book Now Button (Shown on Hover) */}
       <div className="absolute top-0 left-0 w-full h-full bg-black/70 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center text-white px-5 transition-opacity duration-300">

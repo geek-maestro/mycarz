@@ -1,6 +1,6 @@
 const PromoCard = ({ item }) => {
   return (
-    <div className="bg-gradient-to-br from bg-primary via-[#EB4335] to-secondary rounded-xl w-[90%] md:w-[350px] lg:w-[350px] p-5">
+    <div className="bg-gradient-to-br from bg-primary via-[#EB4335] to-secondary rounded-xl w-[300px] aspect-square md:w-[350px] lg:w-[350px] p-5">
       <div className="text-left w-full flex-col">
         <div className="text-xl">{item.name}</div>
         <div className="flex items-center">

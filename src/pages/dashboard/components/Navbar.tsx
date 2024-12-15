@@ -1,11 +1,10 @@
-import React from "react";
 import SearchBar from "../../landing_page/components/SearchBar";
 
 const Navbar = () => {
   return (
-    <header className="md:sticky lg:sticky -top-24 z-30">
-      <nav>
-        <div className="hidden md:block lg:block">
+    <header className="md:sticky lg:sticky top-0 w-full bg-[#6B7280] z-30 overflow-hidden">
+      <nav className="max-w-full">
+        <div className="hidden md:block lg:block w-full">
         <div className="navbar bg-base-100">
           <div className="flex-none">
             <button className="btn btn-square btn-ghost">
@@ -46,12 +45,12 @@ const Navbar = () => {
           </div>
         </div>
 
-        <SearchBar />
+        {/* <SearchBar /> */}
         </div>
 
 
         <div className="w-full items-center justify-center flex sticky top-2 md:hidden lg:hidden">
-          <input type="search" name="" id="" className="w-[90%] bg-white text-slate-600 px-3 py-2 rounded-lg" placeholder="Search..."/>
+          <input type="search" name="" id="" className="w-full bg-white text-slate-600 px-3 py-2 rounded-lg" placeholder="Search..."/>
         </div>
       </nav>
     </header>

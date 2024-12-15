@@ -1,13 +1,14 @@
 import "./App.css";
-import BookingDetails from "./pages/booking";
 import Listings from "./pages/listings";
 import MainLayout from "./pages/layout";
 // import Register from "./pages/auth/register";
 // import AuthLayout from "./pages/layout/auth";
 import { createBrowserRouter, RouterProvider } from "react-router"; // Correct import
-import Dashboard from "./pages/dashboard";
 import LandingPage from "./pages/landing_page";
 import BookingInfo from "./pages/landing_page/BookingInfo";
+import { useEffect } from "react";
+import AOS from 'aos'
+import 'aos/dist/aos.css';
 // import Login from "./pages/auth/login";
 
 // Define routes using createBrowserRouter
@@ -31,6 +32,9 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return <RouterProvider router={router} />;
 }
 
