@@ -59,7 +59,7 @@ const ContactUs = () => {
             href="tel:0538713099"
             className="text-blue-600 font-semibold hover:underline"
           >
-            0538713099
+           +1 (443) 501‑6702
           </a>
         </div>
       </div>
