@@ -146,6 +146,14 @@ const BookingInfo = () => {
   };
   return (
     <div className="my-10 px-5">
+       <div className="bg-primary text-white p-4 rounded-lg mb-5 shadow-md flex justify-between items-center">
+    <div className="font-semibold text-xl">Did you know?</div>
+    <div className="space-y-2">
+      <p>• You get $20 off when you make payment before Fridays!</p>
+      <p>• You get 10 points each time you pay on time! (100 points gives you a Grocery Shopping gift card)</p>
+      <p>• Your Referrals can get you $50 cash!</p>
+    </div>
+  </div>
       <div className="collapse bg-base-200 md:hidden lg:hidden bg-gradient-to-br from-primary via-accent">
         <input type="checkbox" />
         <div className="collapse-title text-xl font-medium">
@@ -631,7 +639,7 @@ const BookingInfo = () => {
           </Formik>
         </div>
 
-        <div className="hidden md:w-[45%] lg:w-[45%] bg-white p-5 rounded-lg shadow-lg right-2 h-full lg:block md:block fixed top-10 overflow-y-scroll max-h-[80vh] my-[10%] py-5">
+        <div className="hidden md:w-[45%] lg:w-[45%] bg-white p-5 rounded-lg shadow-lg right-2 h-full lg:block md:block fixed top-[120px] overflow-y-scroll max-h-[80vh] my-[10%] py-5">
           
           <div className="text-lg font-bold mb-3 capitalize w-full">
             {carData?.name}
