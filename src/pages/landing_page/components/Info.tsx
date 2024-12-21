@@ -15,7 +15,7 @@ const Info = () => {
             <div className="text-sm font-semibold capitalize">global reach</div>
           </div>
           <div className="text-xl font-semibold">
-            2,000+ SIXT stations in over 105 countries
+            2,000+ stations in over 105 countries
           </div>
         </div>
         <div className="flex flex-col md:w-[30%] lg:w-[30%]">
