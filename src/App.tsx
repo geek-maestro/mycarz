@@ -9,6 +9,8 @@ import BookingInfo from "./pages/landing_page/BookingInfo";
 import { useEffect } from "react";
 import AOS from 'aos'
 import 'aos/dist/aos.css';
+import About from "./pages/about";
+import ContactUs from "./pages/contactUs";
 // import Login from "./pages/auth/login";
 
 // Define routes using createBrowserRouter
@@ -27,6 +29,8 @@ const router = createBrowserRouter([
       { path: "/", element: <LandingPage /> },
       { path: "/home", element: <Listings /> },
       { path: "/home/booking", element: <BookingInfo /> },
+      { path: "/home/about", element: <About /> },
+      { path: "/home/contact", element: <ContactUs /> },
     ],
   },
 ]);

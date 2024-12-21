@@ -56,7 +56,7 @@ const Listings = () => {
 
   return (
     <div className="my-10">
-      <div className="flex px-10">
+      <div className="flex md:px-10 px-5">
         <div
           className={`flex-1 lg:pr-5 overflow-y-auto`}
         >
