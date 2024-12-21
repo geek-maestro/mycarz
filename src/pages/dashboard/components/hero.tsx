@@ -14,10 +14,10 @@ const Hero = () => {
         <div className="bg-black bg-opacity-75 h-full">
           <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-2 items-center justify-center container mx-auto">
             <div className="px-10 my-auto h-full justify-center flex flex-col">
-              <h2 className="text-3xl md:text-4xl font-bold capitalize">
+              <h2 className="text-3xl md:text-4xl font-bold capitalize text-yellow-500">
                 Premium car rental in your area
               </h2>
-              <h2 className="text-lg text-gray-400 pr-29 mt-5 capitalize">
+              <h2 className="text-lg text-yellow-400 pr-29 mt-5 capitalize">
                 Book the selected car effortlessly, pay for driving only, book
                 the car now
               </h2>
